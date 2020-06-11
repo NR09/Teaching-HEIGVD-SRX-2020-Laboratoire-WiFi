@@ -120,14 +120,14 @@ Maintenant que vous avez la clé WEP, configurez la dans Wireshark afin de déch
 ---
 > **_Montrer une capture d'écran de l'obtention de la clé WEP_**
 > 
-> ![](\images\cap1.PNG)
+> ![](images/cap1.PNG)
 
 ---
 > **_Question :_** Arrivez-vous à récupérer les informations d’identification (credentials) de l’authentification basique http contenue dans la capture ?
 >
 > **_Réponse :_**  Les informations d'identification sont: admin:admin
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap2.PNG)
+> ![](images/cap2.PNG)
 
 ---
 
@@ -154,9 +154,9 @@ Nous utiliserons Wireshark pour trouver l’authentification WPA contenue dans l
 
 > **_Fournir une capture d'écran des chiffres aléatoires_**
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap3.PNG)
+> ![](images/cap3.PNG)
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap4.PNG)
+> ![](images/cap4.PNG)
 
 ---
 
@@ -183,16 +183,16 @@ aircrack-ng <nom-du-fichier-capture> -w <nom-du-dictionnaire>
 ---
 > **_Montrer une capture d'écran de l'obtention de la passphrase WPA_**
 > 
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap5.PNG)
+> ![](images/cap5.PNG)
 
 ---
 > **_Question :_** Lors de la capture, la cible a fait un « ping » sur un serveur. Arrivez-vous à dire de quel serveur il s’agit ?
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap6.PNG)
+> ![](images/cap6.PNG)
 
 > **_Réponse :_** 
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap7.PNG)
+> ![](images/cap7.PNG)
 >
 > Adresse IP du serveur : 31.13.64.35
 >
@@ -210,7 +210,7 @@ Nous avons enlevé une seule trame (choisie stratégiquement) du fichier de capt
 >
 > **_Réponse :_** Non, aircrack ne détecte plus de réseau.
 >
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap8.PNG)
+> ![](images/cap8.PNG)
 
 ---
 > **_Question :_** Sur la base de votre réponse précédente, arrivez-vous à déduire quelle trame a été effacée ?
