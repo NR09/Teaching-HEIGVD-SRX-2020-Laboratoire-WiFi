@@ -4,7 +4,7 @@ Vous aurez besoin de ``Wireshark`` et du logiciel ``aircrack-ng`` pour ce labora
 
 Si vous utilisez une distribution Kali, tout est déjà pré-installé. Pour la version Windows du logiciel ``aircrack-ng``ou pour son installation sur d'autres distributions, référez-vous au
 [site web aircrack-ng](https://aircrack-ng.org) et/ou au gestionnaire de paquets de votre distribution.
- 
+
 # Identification d'un dispositif
 
 ## Introduction
@@ -42,22 +42,28 @@ Nous savons que la cible s’est hébergée à l’hôtel « Black Rain » et qu
 
 > **_Question :_** Quel filtre avez-vous utilisé
 > 
-> **_Réponse :_** 
+> **_Réponse :_** wlan.fc.type_subtype == 4
 
 ---
 > **_Question :_** Quel est l’adresse MAC de la cible ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** FC:F1:36:22:49:74
 
 ---
 > **_Question :_** Quel est le nom du constructeur de l’interface sans fils de la cible ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_** Samsung Electronics Co., Ltd (Information trouvé sur macvendors.com)
 
 ---
 > **_Question :_** Quel autres endroits la cible a-t-elle probablement visités ?
-> 
-> **_Réponse :_** 
+>
+> **_Réponse :_**  Filtre: wlan.sa == fc:f1:36:22:49:74
+>
+> Nous pouvons voir que la cible à visitée les endroits suivant en plus du Starbucks et de l'hôtel Black Rain:
+>
+> - Magasin Migros
+> - Aéroport de Genève
+> - Boulangerie/Pâtisserie Fleur de Pains
 
 ---
 
@@ -76,7 +82,11 @@ Nous allons nous servir de l’outil ``aircrack-ng`` pour retrouver la clé de c
 ### Exercice :
 
 * Copier [la capture chiffrée avec WEP](files/coursWLAN-WEP.cap)
+
 * Ouvrir le fichier avec Wireshark et essayer de lire son contenu. Utiliser des filtres d’affichage de protocoles connus (http, icmp). Est-ce que vous arrivez à trouver des trames contenant ces protocoles ? (normalement pas puisque le contenu est chiffré !)
+
+  Non, aucunes trames n'est affichée pour ces protocoles.
+
 * Utiliser ``aircrack-ng`` pour récupérer la clé de chiffrement du réseau WEP. Si vous utilisez une distribution Kali, aircrack est déjà installé. Sinon, renseignez-vous sur Internet pour l'installer sur votre système.
 
 ```
@@ -99,21 +109,25 @@ Maintenant que vous avez la clé WEP, configurez la dans Wireshark afin de déch
 
 * Essayez à nouveau de lire le contenu de la capture. Utilisez encore une fois des filtres de protocoles connus (http, icmp). Est-ce que vous arrivez à trouver des trames contenant ces protocoles cette fois-ci ?
 
+  Oui,maintenant nous pouvons voir des trames http et icmp.
+
 * Répondre aux questions suivantes :
 
 > **_Question :_** Combien de temps avez-vous attendu pour obtenir la clé WEP ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_**  Moins d'une seconde
 
 ---
 > **_Montrer une capture d'écran de l'obtention de la clé WEP_**
 > 
-> **_Capture ici_** 
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap1.PNG)
 
 ---
 > **_Question :_** Arrivez-vous à récupérer les informations d’identification (credentials) de l’authentification basique http contenue dans la capture ?
-> 
-> **_Réponse :_** 
+>
+> **_Réponse :_**  Les informations d'identification sont: admin:admin
+>
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap2.PNG)
 
 ---
 
@@ -139,8 +153,10 @@ Nous utiliserons Wireshark pour trouver l’authentification WPA contenue dans l
 * Analyser les messages du 4-way handshake. En particulier, essayer de trouver les chiffres aléatoires (Nonces) échangés entre le client et l’AP.
 
 > **_Fournir une capture d'écran des chiffres aléatoires_**
-> 
-> **_Capture ici_** 
+>
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap3.PNG)
+>
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap4.PNG)
 
 ---
 
@@ -151,7 +167,7 @@ Nous allons nous servir de l’outil aircrack-ng et d’un dictionnaire pour ret
 
 * Copier [le dictionnaire](files/french_dico.txt) sur votre machine locale 
 * Utilisez aircrack-ng en ligne de commandes pour cracker la passphrase du réseau WPA avec le même [fichier de capture chiffrée avec WPA](files/coursWLAN-WPA.cap) que vous avez déjà copié.
- 
+
 ```
 aircrack-ng <nom-du-fichier-capture> -w <nom-du-dictionnaire>
 ```
@@ -162,22 +178,25 @@ aircrack-ng <nom-du-fichier-capture> -w <nom-du-dictionnaire>
 
 > **_Question :_** Combien de temps avez-vous attendu pour obtenir la passphrase WPA ?
 > 
-> **_Réponse :_** 
+> **_Réponse :_**  Environ 36 secondes
 
 ---
 > **_Montrer une capture d'écran de l'obtention de la passphrase WPA_**
 > 
-> **_Capture ici_** 
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap5.PNG)
 
 ---
 > **_Question :_** Lors de la capture, la cible a fait un « ping » sur un serveur. Arrivez-vous à dire de quel serveur il s’agit ?
-
-> 
-> **_Réponse :_** 
-> 
-> Adresse IP du serveur : ?
 >
-> Nom de Domaine : ?
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap6.PNG)
+
+> **_Réponse :_** 
+>
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap7.PNG)
+>
+> Adresse IP du serveur : 31.13.64.35
+>
+> Nom de Domaine : edge-star-mini-shv-01-amt2.facebook.com
 
 
 
@@ -188,12 +207,12 @@ Nous avons enlevé une seule trame (choisie stratégiquement) du fichier de capt
 * Répondre aux questions suivantes :
 
 > **_Question :_** Est-ce que vous arrivez à refaire l'exercice ? Pourquoi ou pourquoi pas ?
-> 
-> **_Réponse :_** 
+>
+> **_Réponse :_** Non, aircrack ne détecte plus de réseau.
+>
+> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap8.PNG)
 
 ---
 > **_Question :_** Sur la base de votre réponse précédente, arrivez-vous à déduire quelle trame a été effacée ?
 
-> 
-> **_Réponse :_** 
-> 
+> **_Réponse :_** Si l'on compare les deux fichiers, nous pouvons constater qu'il manque la secondes trames du 4-way handshake. Cette trame contient la clé pour l'encryptage/décryptage des données, d'où l'impossibilité pour aircrack de fonctionner comme il faut. 
