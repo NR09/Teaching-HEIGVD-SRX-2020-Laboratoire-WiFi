@@ -120,7 +120,7 @@ Maintenant que vous avez la clé WEP, configurez la dans Wireshark afin de déch
 ---
 > **_Montrer une capture d'écran de l'obtention de la clé WEP_**
 > 
-> ![](C:\Git\Teaching-HEIGVD-SRX-2020-Laboratoire-WiFi\images\cap1.PNG)
+> ![](\images\cap1.PNG)
 
 ---
 > **_Question :_** Arrivez-vous à récupérer les informations d’identification (credentials) de l’authentification basique http contenue dans la capture ?
